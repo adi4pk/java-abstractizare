@@ -1,16 +1,20 @@
 package app.formeGeometrice;
 
-public class Figura {
+import app.Duplicabil;
 
-   public void afisare(){
+//todo: cuvantul cheie interface
+// toate metodele sunt by default public abstract
+// toate  clasele ce implementeaza o interfata sunt obligate
+// sa suprascrie metodele interfetei
+// Obs! O clasa poate extide doar o singura clasa
+// dar poate implementa mai multe interfete
+public abstract class Figura implements Duplicabil {
 
-   }
+   public abstract void afisare();
     //(mutare) pe orizontală și/sau verticală a desenului geometric
     // — modificarea x-ului / y-ului tuturorelementelor cu o valoare dată;
 
-    public void translate(int x,int y){
+    public abstract void translate(int x, int y);
 
-    }
-
-    public Figura duplicare(){return null;};
+    public abstract Figura duplicare();
 }

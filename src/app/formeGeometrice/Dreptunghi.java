@@ -1,6 +1,8 @@
 package app.formeGeometrice;
 
-public class Dreptunghi extends Figura{
+import app.Duplicabil;
+
+public class Dreptunghi extends Figura implements Duplicabil, ArieFigura{
 
     //proprietati
     Punct punctA;
@@ -51,4 +53,23 @@ public class Dreptunghi extends Figura{
     public Figura duplicare(){
         return new Dreptunghi((Punct) punctA.duplicare(), (Punct) punctB.duplicare());
     }
+
+    //interface methods
+    @Override
+    public Duplicabil interfaceDuplicate(){
+        return new Dreptunghi((Punct) punctA.duplicare(), (Punct) punctB.duplicare());
+    }
+
+
+    @Override
+    public double calculeazaArie(){
+        double x = Math.abs(punctA.getX() - punctB.getX());     //latime
+        double y = Math.abs(punctA.getY() - punctB.getY());     //inaltime
+
+        double arie = Math.abs(x*y);
+
+        return arie;
+    }
+
+
 }

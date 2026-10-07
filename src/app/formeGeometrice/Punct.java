@@ -1,6 +1,8 @@
 package app.formeGeometrice;
 
-public class Punct extends Figura{
+import app.Duplicabil;
+
+public class Punct extends Figura implements Duplicabil{
 
     //proprietati - coordonate
     private int x;
@@ -69,6 +71,13 @@ public class Punct extends Figura{
 
     @Override
     public Figura duplicare(){
+        return new Punct(x,y);
+    }
+
+
+    //interface methods
+    @Override
+    public Duplicabil interfaceDuplicate(){
         return new Punct(x,y);
     }
 

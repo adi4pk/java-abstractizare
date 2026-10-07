@@ -1,6 +1,8 @@
 package app.formeGeometrice;
 
-public class Linie extends Figura{
+import app.Duplicabil;
+
+public class Linie extends Figura implements Duplicabil{
 
     //proprietati
     private Punct punctA;
@@ -51,7 +53,14 @@ public class Linie extends Figura{
 
 
     @Override
-    public Figura duplicare(){      //use downcast -- duplicare() din Punct returneaza Figura
+    public Figura duplicare(){      //use downcast -- Duplicabil() din Punct returneaza Figura
+        Linie copieLinie = new Linie((Punct) punctA.duplicare(), (Punct) punctB.duplicare());
+        return copieLinie;
+    }
+
+    //interface methods
+    @Override
+    public Duplicabil interfaceDuplicate(){      //use downcast -- Duplicabil() din Punct returneaza Figura
         Linie copieLinie = new Linie((Punct) punctA.duplicare(), (Punct) punctB.duplicare());
         return copieLinie;
     }

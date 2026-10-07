@@ -1,6 +1,8 @@
 package app.formeGeometrice;
 
-public class Cerc extends Figura{
+import app.Duplicabil;
+
+public class Cerc extends Figura implements Duplicabil, ArieFigura{
 
     //proprietati
     private Punct punct;
@@ -34,7 +36,7 @@ public class Cerc extends Figura{
 
     @Override
     public String toString(){
-        return "Punct: " + punct.toString() + ", " + "raza: " + this.getRaza();
+        return "Cerc cu punctul: " + punct.toString() + ", " + "raza: " + this.getRaza();
     }
 
     @Override
@@ -50,5 +52,20 @@ public class Cerc extends Figura{
     @Override
     public Figura duplicare(){
         return new Cerc((Punct) punct.duplicare(), raza);
+    }
+
+    //interface methods
+    @Override
+    public Duplicabil interfaceDuplicate(){
+        return new Cerc((Punct) punct.duplicare(), raza);
+    }
+
+    @Override
+    public double calculeazaArie(){
+
+        double arie = Math.PI * raza * raza;
+//        double arie = Math.PI * Math.pow(raza, 2);
+
+        return arie;
     }
 }

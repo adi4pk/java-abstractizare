@@ -1,6 +1,8 @@
 package app.formeGeometrice;
 
-public class Eticheta extends Dreptunghi{
+import app.Duplicabil;
+
+public class Eticheta extends Dreptunghi implements Duplicabil {
 
     //proprietati - 2 puncte ce definesc un Dreptunghi  + textul dintre ele
 
@@ -62,4 +64,13 @@ public class Eticheta extends Dreptunghi{
     public Dreptunghi duplicare(){
         return new Eticheta((Dreptunghi) dreptunghi.duplicare(), text);
     }
+
+
+    //interface methods
+    @Override
+    public Duplicabil interfaceDuplicate(){
+        return new Eticheta((Dreptunghi) dreptunghi.duplicare(), text);
+    }
+
+
 }

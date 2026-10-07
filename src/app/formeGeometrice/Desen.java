@@ -1,9 +1,11 @@
 package app.formeGeometrice;
 
+import app.Duplicabil;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Desen extends Figura {
+public class Desen extends Figura implements Duplicabil {
 
     private List<Figura> figuri;
 
@@ -14,13 +16,15 @@ public class Desen extends Figura {
 
     @Override
     public String toString(){
-        String text = "Desenul contine: \n";
+//        String text = "Desenul contine: \n";
+        StringBuilder x = new StringBuilder();
         for (Figura fig : figuri){
-            text += fig.toString() + "\n";
+            x.append(fig.toString()).append("\n");
         }
-        return text;
+        return "Desenul contine: \n" + x;
     }
 
+    @Override
     public void afisare(){
         System.out.println(this);
     }
@@ -42,6 +46,32 @@ public class Desen extends Figura {
         }
 
         return new Desen(copieFiguri);
+    }
+
+    @Override
+    public Duplicabil interfaceDuplicate(){
+
+        List<Figura> copieFiguri = new ArrayList<>();
+
+        for (Figura figura:figuri){
+            Figura copieFigura = figura.duplicare();
+            copieFiguri.add(copieFigura);
+        }
+
+        return new Desen(copieFiguri);
+    }
+
+    public double adunaAriile(){
+
+        double arieTotala = 0;
+
+        for (Figura figura:figuri){
+            if (figura instanceof ArieFigura){
+                arieTotala += ((ArieFigura) figura).calculeazaArie();
+            }
+        }
+
+        return arieTotala;
     }
 
 }
