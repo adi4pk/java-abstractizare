@@ -2,6 +2,8 @@ package app;
 
 import app.OrarScheduler.*;
 import app.formeGeometrice.*;
+import app.staticExercitii.Pauza1;
+import app.staticExercitii.Pauza2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +19,9 @@ public class App {
 //        crossEx();
 //        exInterface();
 
-        sortareEx();
+//        sortareEx();
+        staticEx();
+
     }
 
 
@@ -163,6 +167,32 @@ public class App {
         orar.sorteazaIntervale();
 
         orar.afisare();
+
+    }
+
+
+    public static void staticEx(){
+
+        Pauza1 pauza1 = new Pauza1();
+        Pauza2 pauzaStatic = new Pauza2();
+        Pauza2 pauzaStatic2 = new Pauza2();
+        Pauza2 pauzaStatic3 = new Pauza2();
+
+//        System.out.println(pauza1.create);      //acceseaza prin obiect
+//        System.out.println(Pauza2.create);      //acceseaza prin clasa
+
+
+        Interval inter1 = new ActivitateLibera(10, 60, "sport", "teren-fotbal");
+        Interval inter2 = new Pauza(11, 20);
+        Interval inter3 = new OraCurs(15, 90, "Germana", "402");
+        Interval inter4 = new ActivitateLibera(10, 60, "ciclism", "pista");
+        Interval inter5 = inter4.duplicate();
+
+        System.out.println(inter4.getId());
+        System.out.println(Interval.getNextId());
+
+
+
 
     }
 

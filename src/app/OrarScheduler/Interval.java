@@ -9,24 +9,56 @@ public abstract class Interval implements Duplicabil, Comparable<Interval> {
     private int oraInceput;
     private int durataMin;
 
+    // STATIC
+    private static int nextId;
+    private int id;
+    static final int ORA_IN_MINUTE = 60;
+    static final int ZI_IN_MINUTE = 1440;
+
+
+
     protected Interval(int oraInceput, int durataMin) {
 
         this.setOraInceput(oraInceput);
         this.setDurataMin(durataMin);
+        nextId++;
+        id += nextId;
     }
+
 
     /// copy constructor()
     protected Interval(Interval copieInterval){
         this.setOraInceput(copieInterval.getOraInceput());
         this.setDurataMin(copieInterval.getDurataMin());
+
+        nextId++;
+        id += nextId;
+    }
+
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+
+    public static int getNextId() {
+        return nextId;
+    }
+
+    public static void setNextId(int nextId) {
+        Interval.nextId = nextId;
     }
 
     public int getOraInceput() {
-        return oraInceput / 60;
+        return oraInceput / ORA_IN_MINUTE;
     }
 
     public void setOraInceput(int oraInceput) {
-        this.oraInceput = oraInceput * 60;      // ora x min
+        this.oraInceput = oraInceput * ORA_IN_MINUTE;      // ora x min
     }
 
     public int getDurataMin() {
@@ -41,10 +73,10 @@ public abstract class Interval implements Duplicabil, Comparable<Interval> {
     public String afisare(){
         int ora = getOraInceput();
 
-        if(getDurataMin() >= 60){
+        if(getDurataMin() >= ORA_IN_MINUTE){
 
-            int minute = getDurataMin() % 60;
-            int incrementareOre = getDurataMin() / 60;
+            int minute = getDurataMin() % ORA_IN_MINUTE;
+            int incrementareOre = getDurataMin() / ORA_IN_MINUTE;
             ora += incrementareOre;
 
             if (minute ==0){
@@ -62,10 +94,10 @@ public abstract class Interval implements Duplicabil, Comparable<Interval> {
     public String toString(){
         int ora = getOraInceput();
 
-        if(getDurataMin() >= 60){
+        if(getDurataMin() >= ORA_IN_MINUTE){
 
-            int minute = getDurataMin() % 60;
-            int incrementareOre = getDurataMin() / 60;
+            int minute = getDurataMin() % ORA_IN_MINUTE;
+            int incrementareOre = getDurataMin() / ORA_IN_MINUTE;
             ora += incrementareOre;
 
             if (minute ==0){
@@ -81,24 +113,24 @@ public abstract class Interval implements Duplicabil, Comparable<Interval> {
     }
 
     public void decalare(int nrMinute){
-        int decalajInMinute = (getOraInceput() * 60) + nrMinute;
+        int decalajInMinute = (getOraInceput() * ORA_IN_MINUTE) + nrMinute;
 
 
-        int oraDecalata = decalajInMinute/60;
-        int minDecalate = decalajInMinute % 60;
+        int oraDecalata = decalajInMinute/ORA_IN_MINUTE;
+        int minDecalate = decalajInMinute % ORA_IN_MINUTE;
 
-        if (getOraInceput() *60 +nrMinute > 1440){
+        if (getOraInceput() *ORA_IN_MINUTE +nrMinute > ZI_IN_MINUTE){
             oraDecalata = 0;
         }
 
         this.setOraInceput(oraDecalata);
 
 
-        if(decalajInMinute % 60 == 0){
+        if(decalajInMinute % ORA_IN_MINUTE == 0){
             System.out.println("Orarul a fost decalat. Noua ora de incepere " + getTipInterval() + " este " + "ora " + oraDecalata + ":" +minDecalate);
 
         }
-        if (decalajInMinute % 60 != 0 && decalajInMinute/60 < 10){
+        if (decalajInMinute % ORA_IN_MINUTE != 0 && decalajInMinute/ORA_IN_MINUTE < 10){
             System.out.println("Orarul a fost decalat. Noua ora de incepere " + getTipInterval() + " este " + "ora " + oraDecalata + ":" +minDecalate + "0test");
 
         }
