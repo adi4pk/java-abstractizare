@@ -120,7 +120,8 @@ public class App {
         arrDuplicate.addAll(Arrays.asList(cerc1, curs1, orar1));    //???
 
         CrossClass cross = new CrossClass();
-        cross.genereazaCopii(arrDuplicate);
+
+        CrossClass.genereazaCopii(arrDuplicate);
 
 
 
@@ -182,14 +183,25 @@ public class App {
 //        System.out.println(Pauza2.create);      //acceseaza prin clasa
 
 
-        Interval inter1 = new ActivitateLibera(10, 60, "sport", "teren-fotbal");
+        Interval inter1 = new ActivitateLibera(10, 70, "sport", "teren-fotbal");
         Interval inter2 = new Pauza(11, 20);
         Interval inter3 = new OraCurs(15, 90, "Germana", "402");
         Interval inter4 = new ActivitateLibera(10, 60, "ciclism", "pista");
         Interval inter5 = inter4.duplicate();
 
-        System.out.println(inter4.getId());
-        System.out.println(Interval.getNextId());
+//        System.out.println(inter4.getId());
+//        System.out.println(Interval.getNextId());
+//
+//
+//        Pauza pauzaMica = Pauza.pauzaScurta(14);
+//        Pauza pauzaMare = Pauza.pauzaMare(15);
+
+//        System.out.println(pauzaMica);
+//        System.out.println(pauzaMare);
+//
+        System.out.println(inter1);
+        inter1.decalare(80);
+        System.out.println(inter1);
 
 
 

@@ -5,7 +5,7 @@ import app.Duplicabil;
 public abstract class Interval implements Duplicabil, Comparable<Interval> {
 
     //ora inceput, durata in min, materia, sala
-
+//LocalDateTime
     private int oraInceput;
     private int durataMin;
 
@@ -31,6 +31,11 @@ public abstract class Interval implements Duplicabil, Comparable<Interval> {
         this.setOraInceput(copieInterval.getOraInceput());
         this.setDurataMin(copieInterval.getDurataMin());
 
+//        LocalDateTime x = LocalDateTime.now();
+//
+//        x.plusMinutes(23);
+
+
         nextId++;
         id += nextId;
     }
@@ -44,6 +49,13 @@ public abstract class Interval implements Duplicabil, Comparable<Interval> {
         this.id = id;
     }
 
+//    public static int getOraInMinute() {
+//        return ORA_IN_MINUTE;
+//    }
+//
+//    public static int getZiInMinute(){
+//        return ZI_IN_MINUTE;
+//    }
 
     public static int getNextId() {
         return nextId;
@@ -53,12 +65,17 @@ public abstract class Interval implements Duplicabil, Comparable<Interval> {
         Interval.nextId = nextId;
     }
 
-    public int getOraInceput() {
+    public int getOraInceput() {        //returns ore
         return oraInceput / ORA_IN_MINUTE;
     }
 
     public void setOraInceput(int oraInceput) {
-        this.oraInceput = oraInceput * ORA_IN_MINUTE;      // ora x min
+        if (oraInceput <0 || oraInceput > 24){
+            throw new IllegalArgumentException(   //daca nu punem throw -> try/catch nu va prinde nimic -> programul va rula in continuare si va crea obiectul.
+                    "INTERVALUL nu a fost creat. Ora nu poate fi mai mica de 0 sau mai mare de 24.");
+        }
+        else this.oraInceput = oraInceput * ORA_IN_MINUTE;      // ora x min
+
     }
 
     public int getDurataMin() {
@@ -71,72 +88,36 @@ public abstract class Interval implements Duplicabil, Comparable<Interval> {
 
 
     public String afisare(){
-        int ora = getOraInceput();
 
-        if(getDurataMin() >= ORA_IN_MINUTE){
+        return Timp.afisareInterval(this);
 
-            int minute = getDurataMin() % ORA_IN_MINUTE;
-            int incrementareOre = getDurataMin() / ORA_IN_MINUTE;
-            ora += incrementareOre;
-
-            if (minute ==0){
-                return this.getTipInterval() + ": " + "ora " + ora + ":" + minute +"0" + detalii();
-            }
-            return this.getTipInterval() + ": " + "ora " + ora + ":" + minute + detalii();
-
-        } else if (getDurataMin() < 10){
-            return this.getTipInterval() + ": " + "ora " + ora + ":0" + this.getDurataMin() + detalii();
-
-        }
-        return this.getTipInterval() + ": " + "ora " + ora + ":" + this.getDurataMin() + detalii();
     }
 
     public String toString(){
         int ora = getOraInceput();
+//        int minutePesteOra = oraInceput % ORA_IN_MINUTE;    //folosit atunci cand decalam intervalul
 
         if(getDurataMin() >= ORA_IN_MINUTE){
 
-            int minute = getDurataMin() % ORA_IN_MINUTE;
+            int minuteDurata = getDurataMin() % ORA_IN_MINUTE;        //70%60 = 10 min
             int incrementareOre = getDurataMin() / ORA_IN_MINUTE;
-            ora += incrementareOre;
+//            ora += incrementareOre;
 
-            if (minute ==0){
-                return this.getTipInterval() + ": " + "ora " + ora + ":" + minute +"0" + detalii();
+            if (minuteDurata ==0){
+                return this.getTipInterval() + ": " + "ora " + ora + ":" + "0" + detalii();
             }
-            return this.getTipInterval() + ": " + "ora " + ora + ":" + minute + detalii();
+            return this.getTipInterval() + ": " + "ora " + ora + ":" + minuteDurata + detalii() ;
 
         } else if (getDurataMin() < 10){
-            return this.getTipInterval() + ": " + "ora " + ora + ":0" + this.getDurataMin() + detalii();
+            return this.getTipInterval() + ": " + "ora " + ora + ":0"+ detalii();
 
         }
-        return this.getTipInterval() + ": " + "ora " + ora + ":" + this.getDurataMin() + detalii();
+        return this.getTipInterval() + ": " + "ora " + ora + ":" + detalii();
     }
 
     public void decalare(int nrMinute){
-        int decalajInMinute = (getOraInceput() * ORA_IN_MINUTE) + nrMinute;
 
-
-        int oraDecalata = decalajInMinute/ORA_IN_MINUTE;
-        int minDecalate = decalajInMinute % ORA_IN_MINUTE;
-
-        if (getOraInceput() *ORA_IN_MINUTE +nrMinute > ZI_IN_MINUTE){
-            oraDecalata = 0;
-        }
-
-        this.setOraInceput(oraDecalata);
-
-
-        if(decalajInMinute % ORA_IN_MINUTE == 0){
-            System.out.println("Orarul a fost decalat. Noua ora de incepere " + getTipInterval() + " este " + "ora " + oraDecalata + ":" +minDecalate);
-
-        }
-        if (decalajInMinute % ORA_IN_MINUTE != 0 && decalajInMinute/ORA_IN_MINUTE < 10){
-            System.out.println("Orarul a fost decalat. Noua ora de incepere " + getTipInterval() + " este " + "ora " + oraDecalata + ":" +minDecalate + "0test");
-
-        }
-        else {
-            System.out.println("Orarul a fost decalat. Noua ora de incepere " + getTipInterval() + " este " + "ora " + oraDecalata + ":" +"0" +minDecalate);
-        }
+        Timp.decalare(this, nrMinute);
 
     }
 

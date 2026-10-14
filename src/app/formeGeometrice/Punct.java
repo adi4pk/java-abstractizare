@@ -81,4 +81,9 @@ public class Punct extends Figura implements Duplicabil{
         return new Punct(x,y);
     }
 
+
+    public static Punct origine(){      //static func
+        return new Punct(0, 0);
+    }
+
 }

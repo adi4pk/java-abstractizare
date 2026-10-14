@@ -37,13 +37,22 @@ public class Pauza extends Interval implements Duplicabil {
 
     @Override
     public String detalii(){
-        return "";
+        return " test";
     }
 
     //interface methods
     @Override
     public Duplicabil interfaceDuplicate(){
         return new Pauza(this);
+    }
+
+
+    public static Pauza pauzaScurta(int ora){
+        return new Pauza(ora, 10);
+    }
+
+    public static Pauza pauzaMare(int ora){
+        return new Pauza(ora, 20);
     }
 
 }

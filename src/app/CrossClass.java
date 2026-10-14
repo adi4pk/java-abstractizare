@@ -11,7 +11,7 @@ public class CrossClass {
 
     }
 
-    public List<Duplicabil> genereazaCopii (List<Duplicabil> arrDuplicabil){
+    public static List<Duplicabil> genereazaCopii (List<Duplicabil> arrDuplicabil){
 
         List <Duplicabil> arrCopii = new ArrayList<>();
 
